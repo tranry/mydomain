@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+       <KeyFrameSet>
+       </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            motion:layout_editor_absoluteY="459dp"
+            android:layout_height="wrap_content"
+            motion:layout_editor_absoluteX="149dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/btnCheckDomain" />
+        <Constraint
+            motion:layout_editor_absoluteY="362dp"
+            android:layout_height="wrap_content"
+            motion:layout_editor_absoluteX="46dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/edtInputDomain" />
+        <Constraint
+            motion:layout_editor_absoluteY="298dp"
+            android:layout_height="wrap_content"
+            motion:layout_editor_absoluteX="70dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/textView9" />
+        <Constraint
+            motion:layout_editor_absoluteY="-3dp"
+            android:layout_height="264dp"
+            motion:layout_editor_absoluteX="6dp"
+            android:layout_width="410dp"
+            android:id="@+id/imgCheckDomain" />
+        <Constraint
+            motion:layout_editor_absoluteY="531dp"
+            android:layout_height="wrap_content"
+            motion:layout_editor_absoluteX="211dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/textKQ" />
+        <Constraint
+            motion:layout_constraintTop_toBottomOf="@+id/textKQ"
+            android:id="@+id/linearLayout2"
+            motion:layout_editor_absoluteY="551dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+    </ConstraintSet>
+</MotionScene>
