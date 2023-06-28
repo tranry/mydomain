@@ -20,8 +20,8 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintVertical_bias="0.41"
-            motion:layout_constraintHorizontal_bias="0.525" />
+            motion:layout_constraintVertical_bias="0.312"
+            motion:layout_constraintHorizontal_bias="0.531" />
         <Constraint
             motion:layout_editor_absoluteY="102dp"
             android:layout_height="96dp"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:id="@+id/btnSuaThongTin"
-            motion:layout_constraintTop_toBottomOf="@+id/edtDiaChi"
+            motion:layout_constraintTop_toBottomOf="@+id/edtTen"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="72dp"
@@ -112,19 +112,19 @@
         <Constraint
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:id="@+id/edtDiaChi"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="64dp"
-            android:layout_marginRight="64dp"
+            android:id="@+id/edtTen"
             motion:layout_constraintTop_toBottomOf="@+id/edtSDT"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="16dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintHorizontal_bias="0.699"
+            motion:layout_constraintEnd_toEndOf="parent" />
         <Constraint
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:id="@+id/textView16"
             motion:layout_constraintTop_toBottomOf="@+id/textView13"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintEnd_toStartOf="@+id/edtDiaChi"
+            motion:layout_constraintEnd_toStartOf="@+id/edtTen"
             android:layout_marginTop="40dp"
             motion:layout_constraintHorizontal_bias="0.679"
             motion:layout_constraintBottom_toTopOf="@+id/btnSuaThongTin"
@@ -134,7 +134,7 @@
             android:layout_width="wrap_content"
             motion:layout_constraintTop_toBottomOf="@+id/btnSuaThongTin"
             android:id="@+id/button3"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintHorizontal_bias="0.531" />

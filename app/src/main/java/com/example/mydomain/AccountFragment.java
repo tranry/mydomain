@@ -2,7 +2,6 @@ package com.example.mydomain;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.SignalStrengthUpdateRequest;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.UserProfileChangeRequest;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +35,7 @@ public class AccountFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     TextView edtName;
-    EditText edtEmail,edtSDT,edtDiaChi;
+    EditText edtEmail,edtSDT,edtNames;
     Button btnEditInfo;View mView;
 
     public AccountFragment() {
@@ -80,7 +74,7 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
          mView=inflater.inflate(R.layout.fragment_account, container, false);
         Button btnThoat= mView.findViewById(R.id.btnThoat);
-        edtDiaChi=mView.findViewById(R.id.edtDiaChi);
+        edtNames=mView.findViewById(R.id.edtTen);
         edtEmail=mView.findViewById(R.id.edtEmailAccount);
         edtSDT=mView.findViewById(R.id.edtSDT);
          edtName=mView.findViewById(R.id.edtName);
@@ -106,20 +100,24 @@ public class AccountFragment extends Fragment {
 
     private void suaThongTin() {
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        UserProfileChangeRequest profile=new UserProfileChangeRequest.Builder().setDisplayName(edtDiaChi.getText().toString()).build();
-        user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful())
-                    Toast.makeText(mView.getContext(), "Update thành công", Toast.LENGTH_SHORT).show();
+        UserProfileChangeRequest profile=new UserProfileChangeRequest.Builder().setDisplayName(edtNames.getText().toString()).build();
 
-            }
-        });
         user.updateEmail(edtEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
-                    Toast.makeText(mView.getContext(), "Update thành công", Toast.LENGTH_SHORT).show();
+                    user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful())
+                            {
+                                getInfoUser();
+                                Toast.makeText(mView.getContext(), "Update thành công", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+                    });
             }
         });
 //        PhoneAuthCredential phone=new PhoneAuthCredential();
@@ -128,9 +126,9 @@ public class AccountFragment extends Fragment {
 
     private void getInfoUser() {
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        edtName.setText(user.getDisplayName()==""?"Member":user.getDisplayName());
+        edtName.setText("Chào "+(user.getDisplayName()==""?"Member":user.getDisplayName()));
         edtSDT.setText(user.getPhoneNumber());
         edtEmail.setText(user.getEmail());
-
+        edtNames.setText(user.getDisplayName());
     }
 }

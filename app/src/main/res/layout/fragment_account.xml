@@ -71,15 +71,15 @@
         tools:layout_editor_absoluteY="312dp" />
 
     <EditText
-        android:id="@+id/edtDiaChi"
+        android:id="@+id/edtTen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="8"
         android:inputType="textPersonName"
         android:text=""
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="431dp" />
+        tools:layout_editor_absoluteX="180dp"
+        tools:layout_editor_absoluteY="370dp" />
 
     <TextView
         android:id="@+id/edtEmail"
@@ -106,7 +106,7 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Địa chỉ"
+        android:text="Họ tên"
         android:textSize="15sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="101dp"
