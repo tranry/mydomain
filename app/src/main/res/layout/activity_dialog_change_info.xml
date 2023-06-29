@@ -135,10 +135,11 @@
                 android:layout_gravity="center"
                 android:background="@drawable/custom_buy"
                 android:gravity="center"
+                android:text="OTP"
+                android:textSize="10dp"
                 android:textStyle="bold"
-                android:text="Send"
-                android:textSize="8dp"
-                app:backgroundTint="@null" />
+                app:backgroundTint="@null"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
     </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.mydomain;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,9 +28,15 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +61,8 @@ public class AccountFragment extends Fragment {
     EditText edtChangeName,editChangeEmail,edtChangeNumber;
     ConstraintLayout layoutbackToAccount;
     Handler myHandler;
+    String verificationId;
+    boolean KiemTraGuiSms=false;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -152,8 +161,13 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 if(!edtChangeNumber.getText().toString().trim().equals(""))
                 {
-                         int i=30;
-                        delaySend(btnSendVery,i);
+
+                         int i=60;
+                    edtChangeNumber.setText("");
+                    edtChangeNumber.setHint("Nhập mã OTP");
+                    verifyNumber(edtChangeNumber.getText().toString(),getActivity());
+                    delaySend(btnSendVery,i);
+
 
                 }
 
@@ -176,11 +190,37 @@ public class AccountFragment extends Fragment {
         dialog.setContentView(view);
     }
 
+    private void verifyNumber(String phone, Activity activity) {
+        FirebaseAuth auth= FirebaseAuth.getInstance();
+        PhoneAuthOptions phoneAuthOptions=PhoneAuthOptions.newBuilder(auth)
+                .setPhoneNumber("+84"+phone).setActivity(activity).setTimeout(60L, TimeUnit.SECONDS)
+                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+
+                    }
+
+                    @Override
+                    public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        super.onCodeSent(s, forceResendingToken);
+                        verificationId=s;
+
+                    }
+                }).build();
+        PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions);
+    }
 
 
     private void delaySend(Button btnSendVery,int i) {
+
         if(i>0)
         {
+
             Handler handler=new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -190,7 +230,10 @@ public class AccountFragment extends Fragment {
                 }
             },1000);
         }
-        else btnSendVery.setText("Send");
+        else {
+            edtChangeNumber.setText("");
+            btnSendVery.setText("OTP");
+        }
     }
 
 
@@ -225,9 +268,16 @@ public class AccountFragment extends Fragment {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful())
                                     {
-                                        getInfoUser();
-                                        Toast.makeText(mView.getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                                        dialog.hide();
+                                        if(!edtChangeNumber.getText().toString().equals("")&&KiemTraGuiSms)
+                                        {
+                                            sendCodeVerify(edtChangeNumber.getText().toString());
+                                            getInfoUser();
+                                            Toast.makeText(mView.getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                            dialog.hide();
+                                        }
+                                       else  Toast.makeText(mView.getContext(), "Vui lòng xác thực số điện thoại", Toast.LENGTH_SHORT).show();
+
+
                                     }
 
                                 }
@@ -236,6 +286,11 @@ public class AccountFragment extends Fragment {
             }
         });
 
+    }
+
+    private void sendCodeVerify(String code) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
+        KiemTraGuiSms=true;
     }
 
     private void getInfoChange() {
