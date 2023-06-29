@@ -1,16 +1,28 @@
 package com.example.mydomain;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.ComponentActivity;
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,9 +46,14 @@ public class AccountFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    TextView edtName;
-    EditText edtEmail,edtSDT,edtNames;
+//    TextView edtName;
+    TextView edtEmail,edtSDT,edtNames;
     Button btnEditInfo;View mView;
+    ConstraintLayout constraintShare,constraintChangeInfo;
+    Button btnChangeInfo;
+    EditText edtChangeName,editChangeEmail,edtChangeNumber;
+    ConstraintLayout layoutbackToAccount;
+    Handler myHandler;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -73,62 +90,157 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
          mView=inflater.inflate(R.layout.fragment_account, container, false);
-        Button btnThoat= mView.findViewById(R.id.btnThoat);
-        edtNames=mView.findViewById(R.id.edtTen);
-        edtEmail=mView.findViewById(R.id.edtEmailAccount);
-        edtSDT=mView.findViewById(R.id.edtSDT);
-         edtName=mView.findViewById(R.id.edtName);
-         btnEditInfo=mView.findViewById(R.id.btnSuaThongTin);
-        getInfoUser();
-        btnEditInfo.setOnClickListener(new View.OnClickListener() {
+//        Button btnThoat= mView.findViewById(R.id.btnThoat);
+        edtNames=mView.findViewById(R.id.textName);
+        edtEmail=mView.findViewById(R.id.textEmail);
+        constraintShare=mView.findViewById(R.id.constraintShare);
+        constraintChangeInfo=mView.findViewById(R.id.constraintChangeInfo);
+
+        constraintShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                suaThongTin();
+                shareApp(v.getContext());
             }
         });
-        btnThoat.setOnClickListener(new View.OnClickListener() {
+        constraintChangeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(view.getContext(), "Thoát thành công", Toast.LENGTH_SHORT).show();
-                Intent it = new Intent(view.getContext(), MainActivity.class);
-                startActivity(it);
+            public void onClick(View v) {
+                showDialogChangeInfo(v.getContext());
             }
         });
+
+//        edtSDT=mView.findViewById(R.id.edtSDT);
+//         edtName=mView.findViewById(R.id.edtName);
+//         btnEditInfo=mView.findViewById(R.id.btnSuaThongTin);
+        getInfoUser();
+//        btnEditInfo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                suaThongTin();
+//            }
+//        });
+//        btnThoat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                FirebaseAuth.getInstance().signOut();
+//                Toast.makeText(view.getContext(), "Thoát thành công", Toast.LENGTH_SHORT).show();
+//                Intent it = new Intent(view.getContext(), MainActivity.class);
+//                startActivity(it);
+//            }
+//        });
         return mView;
     }
 
-    private void suaThongTin() {
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        UserProfileChangeRequest profile=new UserProfileChangeRequest.Builder().setDisplayName(edtNames.getText().toString()).build();
-
-        user.updateEmail(edtEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+    private void showDialogChangeInfo(Context context) {
+        final Dialog dialog=new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_dialog_change_info);
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,1800);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        View view=getLayoutInflater().inflate(R.layout.activity_dialog_change_info,null,false);
+        btnChangeInfo=view.findViewById(R.id.btnChangeInfo);
+        editChangeEmail=view.findViewById(R.id.edtChangeEmail);
+        edtChangeName=view.findViewById(R.id.edtChangeName);
+        edtChangeNumber=view.findViewById(R.id.edtChangeNumber);
+        layoutbackToAccount=view.findViewById(R.id.layoutbackToAccount);
+        Button btnSendVery=view.findViewById(R.id.btnSendVery);
+        btnSendVery.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful())
-                    user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
-                            {
-                                getInfoUser();
-                                Toast.makeText(mView.getContext(), "Update thành công", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                if(!edtChangeNumber.getText().toString().trim().equals(""))
+                {
+                         int i=30;
+                        delaySend(btnSendVery,i);
 
-                            }
+                }
 
-                        }
-                    });
             }
         });
-//        PhoneAuthCredential phone=new PhoneAuthCredential();
-//        user.updatePhoneNumber(edtSDT.getText().toString())
+        layoutbackToAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.hide();
+            }
+        });
+        getInfoChange();
+        btnChangeInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               changeInfo(dialog);
+            }
+        });
+
+        dialog.setContentView(view);
     }
+
+
+
+    private void delaySend(Button btnSendVery,int i) {
+        if(i>0)
+        {
+            Handler handler=new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    btnSendVery.setText(i+"");
+                    delaySend(btnSendVery,i-1);
+                }
+            },1000);
+        }
+        else btnSendVery.setText("Send");
+    }
+
+
+    private void shareApp(Context context) {
+        Intent intent= new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT,"Tải ứng dụng ngay tại https://github.com/tranry/mydomain ");
+        intent.setType("text/plain");
+        context.startActivity(intent);
+
+    }
+
+
 
     private void getInfoUser() {
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        edtName.setText("Chào "+(user.getDisplayName()==""?"Member":user.getDisplayName()));
-        edtSDT.setText(user.getPhoneNumber());
+        edtNames.setText("Chào "+(user.getDisplayName()==""?"Member":user.getDisplayName()));
+//        edtSDT.setText(user.getPhoneNumber());
         edtEmail.setText(user.getEmail());
-        edtNames.setText(user.getDisplayName());
+//        edtNames.setText(user.getDisplayName());
+    }
+    private void changeInfo(Dialog dialog) {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+
+        UserProfileChangeRequest profile=new UserProfileChangeRequest.Builder().setDisplayName(edtChangeName.getText().toString()).build();
+        user.updateEmail(editChangeEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                            user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful())
+                                    {
+                                        getInfoUser();
+                                        Toast.makeText(mView.getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                        dialog.hide();
+                                    }
+
+                                }
+                });
+
+            }
+        });
+
+    }
+
+    private void getInfoChange() {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        edtChangeName.setText(user.getDisplayName().equals("")?"":user.getDisplayName());
+        editChangeEmail.setText(user.getEmail());
     }
 }

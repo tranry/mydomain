@@ -22,4 +22,8 @@
     <style name="Theme.MyDomain.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MyDomain.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/sile_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/sile_out_bottom</item>
+    </style>
 </resources>

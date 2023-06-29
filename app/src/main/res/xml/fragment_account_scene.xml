@@ -13,16 +13,6 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:layout_height="53dp"
-            android:layout_width="91dp"
-            android:id="@+id/btnThoat"
-            motion:layout_constraintTop_toBottomOf="@+id/button3"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintVertical_bias="0.312"
-            motion:layout_constraintHorizontal_bias="0.531" />
-        <Constraint
             motion:layout_editor_absoluteY="102dp"
             android:layout_height="96dp"
             motion:layout_editor_absoluteX="158dp"
@@ -39,105 +29,79 @@
             motion:layout_editor_absoluteY="158dp"
             motion:layout_editor_absoluteX="156dp" />
         <Constraint
-            android:layout_height="96dp"
-            android:layout_width="96dp"
-            android:id="@+id/profile_image"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="104dp"
-            motion:layout_constraintHorizontal_bias="0.488" />
-        <Constraint
             motion:layout_editor_absoluteY="229dp"
             android:layout_height="wrap_content"
             motion:layout_editor_absoluteX="82dp"
             android:layout_width="wrap_content"
             android:id="@+id/textView12" />
         <Constraint
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/btnSuaThongTin"
-            motion:layout_constraintTop_toBottomOf="@+id/edtTen"
+            android:layout_height="63dp"
+            android:layout_width="416dp"
+            android:id="@+id/imageView5"
+            motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="72dp"
-            motion:layout_constraintHorizontal_bias="0.55" />
-        <Constraint
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/textView13"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"
-            motion:layout_constraintEnd_toStartOf="@+id/edtSDT"
-            motion:layout_constraintHorizontal_bias="0.283"
-            motion:layout_constraintTop_toBottomOf="@+id/edtEmail"
-            android:layout_marginTop="44dp" />
-        <Constraint
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/edtEmail"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="64dp"
-            android:layout_marginStart="64dp"
-            motion:layout_constraintEnd_toStartOf="@+id/edtEmailAccount"
-            motion:layout_constraintHorizontal_bias="0.0"
+            motion:layout_editor_absoluteX="-3dp"
             motion:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="268dp" />
+            motion:layout_editor_absoluteY="195dp" />
+        <Constraint
+            android:layout_height="530dp"
+            android:layout_width="406dp"
+            motion:layout_constraintTop_toBottomOf="@+id/imageView5"
+            android:id="@+id/view" />
         <Constraint
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/edtName"
-            motion:layout_constraintTop_toBottomOf="@+id/profile_image"
+            android:layout_width="416dp"
+            motion:layout_constraintTop_toBottomOf="@+id/imageView5"
+            android:id="@+id/view2"
+            motion:layout_editor_absoluteX="-1dp" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/textView15"
+            motion:layout_constraintStart_toEndOf="@+id/constraintLayout3" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/constraintLayout4"
+            motion:layout_editor_absoluteX="411dp" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/constraintLayout6"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/linearLayout3"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
         <Constraint
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/edtEmailAccount"
+            android:id="@+id/constraintLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Constraint
+            android:layout_height="63dp"
+            motion:layout_editor_absoluteX="-3dp"
+            android:layout_width="416dp"
+            android:id="@+id/imageView6"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_editor_absoluteY="239dp" />
+        <Constraint
+            android:layout_height="63dp"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="64dp"
-            android:layout_marginRight="64dp"
-            motion:layout_constraintTop_toBottomOf="@+id/edtName"
-            android:layout_marginTop="28dp" />
-        <Constraint
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/edtSDT"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="64dp"
-            android:layout_marginRight="64dp"
-            motion:layout_constraintTop_toBottomOf="@+id/edtEmailAccount"
-            android:layout_marginTop="16dp" />
-        <Constraint
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/edtTen"
-            motion:layout_constraintTop_toBottomOf="@+id/edtSDT"
-            android:layout_marginTop="16dp"
+            android:layout_width="416dp"
+            android:id="@+id/imageView65"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintHorizontal_bias="0.699"
-            motion:layout_constraintEnd_toEndOf="parent" />
+            motion:layout_editor_absoluteX="-3dp"
+            motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/textView16"
-            motion:layout_constraintTop_toBottomOf="@+id/textView13"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintEnd_toStartOf="@+id/edtTen"
-            android:layout_marginTop="40dp"
-            motion:layout_constraintHorizontal_bias="0.679"
-            motion:layout_constraintBottom_toTopOf="@+id/btnSuaThongTin"
-            motion:layout_constraintVertical_bias="0.027" />
-        <Constraint
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/btnSuaThongTin"
-            android:id="@+id/button3"
-            android:layout_marginTop="16dp"
+            android:id="@+id/imageView15"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintHorizontal_bias="0.531" />
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            motion:layout_editor_absoluteY="243dp"
+            motion:layout_editor_absoluteX="5dp"
+            android:id="@+id/imageView17" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

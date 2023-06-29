@@ -13,9 +13,9 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:layout_height="265dp"
-            motion:layout_editor_absoluteX="0dp"
-            android:layout_width="411dp"
+            android:layout_height="318dp"
+            motion:layout_editor_absoluteX="-2dp"
+            android:layout_width="415dp"
             android:id="@+id/imageView2"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:id="@+id/textView"
             motion:layout_constraintTop_toBottomOf="@+id/imageView2"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="20dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
         <Constraint
