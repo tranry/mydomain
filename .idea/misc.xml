@@ -12,6 +12,7 @@
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_card.xml" value="0.136" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_edittext.xml" value="0.2235" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/dialog_bg.xml" value="0.2" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/dialog_bg_notify.xml" value="0.203" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2235" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.279" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/menu_navigation.xml" value="0.136" />
@@ -30,7 +31,8 @@
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/bottom_sheet_dialog_changeinfo.xml" value="0.2734375" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/content_home.xml" value="0.20969202898550723" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/content_main.xml" value="0.20969202898550723" />
-        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/fragment_account.xml" value="0.3319672131147541" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/dialog_notify.xml" value="0.2667572463768116" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/fragment_account.xml" value="0.2764505119453925" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/fragment_dashboard.xml" value="0.20969202898550723" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/fragment_event.xml" value="0.1" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/fragment_gallery.xml" value="0.20969202898550723" />

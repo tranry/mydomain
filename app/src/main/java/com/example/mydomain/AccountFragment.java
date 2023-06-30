@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,25 +17,36 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.ComponentActivity;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.TimeUnit;
 
@@ -58,11 +70,13 @@ public class AccountFragment extends Fragment {
     Button btnEditInfo;View mView;
     ConstraintLayout constraintShare,constraintChangeInfo;
     Button btnChangeInfo;
-    EditText edtChangeName,editChangeEmail,edtChangeNumber;
-    ConstraintLayout layoutbackToAccount;
+    EditText edtChangeName,editChangeEmail,edtChangeNumber,edtChangePassword;
+    ConstraintLayout layoutbackToAccount,constraintExit,constraintNotify;
     Handler myHandler;
     String verificationId;
     boolean KiemTraGuiSms=false;
+    ImageView imgChangeAvata,profile_image;
+
 
     public AccountFragment() {
         // Required empty public constructor
@@ -103,8 +117,34 @@ public class AccountFragment extends Fragment {
         edtNames=mView.findViewById(R.id.textName);
         edtEmail=mView.findViewById(R.id.textEmail);
         constraintShare=mView.findViewById(R.id.constraintShare);
+        imgChangeAvata=mView.findViewById(R.id.imgChangeAvata);
         constraintChangeInfo=mView.findViewById(R.id.constraintChangeInfo);
-
+        profile_image=mView.findViewById(R.id.profile_image);
+        constraintNotify=mView.findViewById(R.id.constraintNotify);
+        constraintExit=mView.findViewById(R.id.constraintExit);
+        getInfoUser();
+        constraintNotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogNotify(mView.getContext());
+            }
+        });
+        constraintExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//               AccountFragment.this.getActivity().finishAndRemoveTask();
+//               System.exit(0);
+               FirebaseAuth.getInstance().signOut();
+               Intent intent=new Intent(mView.getContext(),MainActivity.class);
+               startActivity(intent);
+            }
+        });
+        imgChangeAvata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImagePicker.with(AccountFragment.this).crop(96,96).maxResultSize(96,96).start();
+            }
+        });
         constraintShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +161,7 @@ public class AccountFragment extends Fragment {
 //        edtSDT=mView.findViewById(R.id.edtSDT);
 //         edtName=mView.findViewById(R.id.edtName);
 //         btnEditInfo=mView.findViewById(R.id.btnSuaThongTin);
-        getInfoUser();
+
 //        btnEditInfo.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -140,6 +180,61 @@ public class AccountFragment extends Fragment {
         return mView;
     }
 
+    private void dialogNotify(Context context) {
+        final Dialog dialog=new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_notify);
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,500);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        View view=getLayoutInflater().inflate(R.layout.dialog_notify,null,false);
+        TextView textNotify=view.findViewById(R.id.textNotify);
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=firebaseDatabase.getReference("notify");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                textNotify.setText(snapshot.getValue(String.class));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        dialog.setContentView(view);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            //Image Uri will not be null for RESULT_OK
+            Uri uri=data.getData();
+
+            FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+            UserProfileChangeRequest profile=new  UserProfileChangeRequest.Builder().setPhotoUri(uri).build();
+            user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful())
+                    {
+                        profile_image.setImageURI(uri);
+                    }
+                }
+            });
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(mView.getContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mView.getContext(), "Đã hủy", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     private void showDialogChangeInfo(Context context) {
         final Dialog dialog=new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -153,6 +248,7 @@ public class AccountFragment extends Fragment {
         btnChangeInfo=view.findViewById(R.id.btnChangeInfo);
         editChangeEmail=view.findViewById(R.id.edtChangeEmail);
         edtChangeName=view.findViewById(R.id.edtChangeName);
+        edtChangePassword=view.findViewById(R.id.edtChangePasswords);
         edtChangeNumber=view.findViewById(R.id.edtChangeNumber);
         layoutbackToAccount=view.findViewById(R.id.layoutbackToAccount);
         Button btnSendVery=view.findViewById(R.id.btnSendVery);
@@ -165,7 +261,7 @@ public class AccountFragment extends Fragment {
                          int i=60;
                     edtChangeNumber.setText("");
                     edtChangeNumber.setHint("Nhập mã OTP");
-                    verifyNumber(edtChangeNumber.getText().toString(),getActivity());
+                    verifyNumber(edtChangeNumber.getText().toString());
                     delaySend(btnSendVery,i);
 
 
@@ -176,7 +272,7 @@ public class AccountFragment extends Fragment {
         layoutbackToAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.hide();
+                dialog.cancel();
             }
         });
         getInfoChange();
@@ -190,10 +286,10 @@ public class AccountFragment extends Fragment {
         dialog.setContentView(view);
     }
 
-    private void verifyNumber(String phone, Activity activity) {
+    private void verifyNumber(String phone) {
         FirebaseAuth auth= FirebaseAuth.getInstance();
         PhoneAuthOptions phoneAuthOptions=PhoneAuthOptions.newBuilder(auth)
-                .setPhoneNumber("+84"+phone).setActivity(activity).setTimeout(60L, TimeUnit.SECONDS)
+                .setPhoneNumber("+84"+phone).setActivity(AccountFragment.this.getActivity()).setTimeout(60L, TimeUnit.SECONDS)
                 .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -253,40 +349,75 @@ public class AccountFragment extends Fragment {
         edtNames.setText("Chào "+(user.getDisplayName()==""?"Member":user.getDisplayName()));
 //        edtSDT.setText(user.getPhoneNumber());
         edtEmail.setText(user.getEmail());
+        profile_image.setImageURI(user.getPhotoUrl());
 //        edtNames.setText(user.getDisplayName());
     }
     private void changeInfo(Dialog dialog) {
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 
         UserProfileChangeRequest profile=new UserProfileChangeRequest.Builder().setDisplayName(edtChangeName.getText().toString()).build();
-        user.updateEmail(editChangeEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful())
-                            user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+        try {
+            String email=editChangeEmail.getText().toString().trim();
+            String password=edtChangePassword.getText().toString().trim();
+            user.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful())
+                           user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful())
                                     {
-                                        if(!edtChangeNumber.getText().toString().equals("")&&KiemTraGuiSms)
+                                        if(!edtChangePassword.getText().toString().isEmpty())
                                         {
-                                            sendCodeVerify(edtChangeNumber.getText().toString());
-                                            getInfoUser();
-                                            Toast.makeText(mView.getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                                            dialog.hide();
+//                                            sendCodeVerify(edtChangeNumber.getText().toString());
+//                                            user.updatePassword(edtChangePassword.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                @Override
+//                                                public void onComplete(@NonNull Task<Void> task) {
+//                                                    if(task.isSuccessful())
+//                                                    {
+//                                                        getInfoUser();
+//                                                        Toast.makeText(mView.getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+//                                                        dialog.hide();
+//                                                    }
+//                                                    else Toast.makeText(mView.getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+//
+//
+//                                                }
+//                                            });
+                                            FirebaseAuth auth= FirebaseAuth.getInstance();
+                                            auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                    if(task.isSuccessful())
+                                                    {
+                                                        getInfoUser();
+                                                        Toast.makeText(mView.getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                                        dialog.cancel();
+                                                    }
+                                                    else Toast.makeText(mView.getContext(), "Sai mật khẩu", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
                                         }
-                                       else  Toast.makeText(mView.getContext(), "Vui lòng xác thực số điện thoại", Toast.LENGTH_SHORT).show();
+                                       else  Toast.makeText(mView.getContext(), "Vui lòng nhập mật khẩu để xác thực", Toast.LENGTH_SHORT).show();
 
 
                                     }
 
                                 }
                 });
+                    else Toast.makeText(mView.getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                 }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-            }
-        });
 
     }
+
+
 
     private void sendCodeVerify(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
@@ -297,5 +428,6 @@ public class AccountFragment extends Fragment {
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         edtChangeName.setText(user.getDisplayName().equals("")?"":user.getDisplayName());
         editChangeEmail.setText(user.getEmail());
+
     }
 }

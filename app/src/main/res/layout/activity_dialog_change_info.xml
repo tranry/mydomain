@@ -64,6 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:drawablePadding="10dp"
+
             android:inputType="textPersonName"
             android:text=""
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -81,6 +83,7 @@
             android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:textStyle="bold"
+
             android:textSize="15sp"
             android:layout_height="wrap_content"
             android:text="Email" />
@@ -91,6 +94,7 @@
             android:drawableLeft="@drawable/ic_baseline_email_24"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:drawablePadding="10dp"
             android:inputType="textPersonName"
             android:text=""
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -100,6 +104,7 @@
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         android:layout_margin="30dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/layoutEmail"
@@ -143,7 +148,44 @@
         </LinearLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/layoutEmail"
+        tools:layout_editor_absoluteX="10dp">
 
+        <TextView
+            android:id="@+id/textView163"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mật khẩu"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtChangePasswords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:hint="Vui lòng nhập mật khẩu hiện tại"
+                android:drawableLeft="@drawable/ic_baseline_privacy_tip_24"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text=""
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
     <Button
         android:id="@+id/btnChangeInfo"
         android:layout_width="wrap_content"
@@ -155,6 +197,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
