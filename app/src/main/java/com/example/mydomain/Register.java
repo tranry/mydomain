@@ -38,7 +38,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         getSupportActionBar().hide();
         imgBack=findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -74,9 +74,11 @@ public class Register extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             progress.dismiss();
                                             if (task.isSuccessful()) {
-                                                Intent it = new Intent(view.getContext(), Home.class);
+                                                Intent it = new Intent(view.getContext(), Login.class);
                                                 startActivity(it);
                                                 finishAffinity();
+                                                Toast.makeText(Register.this, "Đăng Ký Thành Công", Toast.LENGTH_SHORT).show();
+
                                             } else {
                                                 AlertDialog.Builder alert = new AlertDialog.Builder(Register.this);
                                                 alert.setTitle("Thất bại");
