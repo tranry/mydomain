@@ -6,8 +6,10 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,7 +21,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         this.getSupportActionBar().hide();
         mView=findViewById(R.id.viewPager);
         bottom=findViewById(R.id.bottom_navigation);
@@ -46,6 +48,7 @@ public class Home extends AppCompatActivity {
                         bottom.getMenu().findItem(R.id.navigation_setting).setChecked(true);
                         break;
 
+
                 }
             }
 
@@ -68,6 +71,7 @@ public class Home extends AppCompatActivity {
                     case R.id.navigation_setting:
                         mView.setCurrentItem(2);
                         break;
+
                 }
                 return true;
             }

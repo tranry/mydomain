@@ -1,11 +1,14 @@
 package com.example.mydomain;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +31,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -71,7 +77,7 @@ public class AccountFragment extends Fragment {
     ConstraintLayout constraintShare,constraintChangeInfo;
     Button btnChangeInfo;
     EditText edtChangeName,editChangeEmail,edtChangeNumber,edtChangePassword;
-    ConstraintLayout layoutbackToAccount,constraintExit,constraintNotify;
+    ConstraintLayout layoutbackToAccount,constraintExit,constraintNotify,constraintManageDomain;
     Handler myHandler;
     String verificationId;
     boolean KiemTraGuiSms=false;
@@ -122,6 +128,7 @@ public class AccountFragment extends Fragment {
         profile_image=mView.findViewById(R.id.profile_image);
         constraintNotify=mView.findViewById(R.id.constraintNotify);
         constraintExit=mView.findViewById(R.id.constraintExit);
+        constraintManageDomain=mView.findViewById(R.id.constraintManageDomain);
         getInfoUser();
         constraintNotify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,9 +141,22 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
 //               AccountFragment.this.getActivity().finishAndRemoveTask();
 //               System.exit(0);
-               FirebaseAuth.getInstance().signOut();
-               Intent intent=new Intent(mView.getContext(),MainActivity.class);
-               startActivity(intent);
+                AlertDialog.Builder alBuilder=new AlertDialog.Builder(mView.getContext());
+                alBuilder.setTitle("Thông báo");
+                alBuilder.setMessage("Nhấn OK để tiếp tục đăng xuất");
+                alBuilder.setIcon(R.drawable.ic_baseline_warning_24);
+                alBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent=new Intent(mView.getContext(),MainActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(v.getContext(),"Đăng xuất thành công",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                alBuilder.create().show();
+
+
             }
         });
         imgChangeAvata.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +197,17 @@ public class AccountFragment extends Fragment {
 //                startActivity(it);
 //            }
 //        });
+        constraintManageDomain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+//                Toast.makeText(mView.getContext(), user.getUid()+"", Toast.LENGTH_SHORT).show();
+
+                Intent intent=new Intent(mView.getContext(),Manage.class);
+                startActivity(intent);
+
+            }
+        });
         return mView;
     }
 
@@ -184,7 +215,7 @@ public class AccountFragment extends Fragment {
         final Dialog dialog=new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_notify);
-        dialog.show();
+
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,500);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
@@ -197,6 +228,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 textNotify.setText(snapshot.getValue(String.class));
+                databaseReference.setValue("Chào mừng bạn");
 
             }
 
@@ -206,6 +238,7 @@ public class AccountFragment extends Fragment {
             }
         });
         dialog.setContentView(view);
+        dialog.show();
     }
 
     @Override
@@ -425,9 +458,16 @@ public class AccountFragment extends Fragment {
     }
 
     private void getInfoChange() {
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        edtChangeName.setText(user.getDisplayName().equals("")?"":user.getDisplayName());
-        editChangeEmail.setText(user.getEmail());
+        try {
+            FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+            edtChangeName.setText(user.getDisplayName().equals("")?"":user.getDisplayName());
+            editChangeEmail.setText(user.getEmail());
+        }
+       catch (Exception e)
+       {
+
+       }
+
 
     }
 }

@@ -19,7 +19,7 @@ public class welcome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         this.getSupportActionBar().hide();
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         ImageView welcome = findViewById(R.id.gif);
         ImageView hello = findViewById(R.id.gifhello);
         Glide.with(this).load(R.drawable.load).into(welcome);
