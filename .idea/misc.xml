@@ -3,28 +3,35 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable-v24/custom_avatar.xml" value="0.2755" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable-v24/custom_bglogin.xml" value="0.279" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable-v24/custom_buttonBuy.xml" value="0.279" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2235" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_back.xml" value="0.278" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_backlogin.xml" value="0.2275" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_button.xml" value="0.137" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_buttonlogup.xml" value="0.278" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_buttonregister.xml" value="0.2275" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_buy.xml" value="0.279" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_card.xml" value="0.136" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_edit.xml" value="0.2275" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_edittext.xml" value="0.2235" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_login.xml" value="0.136" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/custom_search.xml" value="0.2275" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/dialog_bg.xml" value="0.2" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/dialog_bg_notify.xml" value="0.203" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2235" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.279" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/drawable/menu_navigation.xml" value="0.136" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_dialog_change_info.xml" value="0.2667572463768116" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_domain_all.xml" value="0.21557971014492755" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_home.xml" value="0.20969202898550723" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_home_domain.xml" value="0.20969202898550723" />
-        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_login.xml" value="0.32" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_login_account.xml" value="0.264" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_main2.xml" value="0.20969202898550723" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_manage.xml" value="0.1" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_register.xml" value="0.22509057971014493" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_result.xml" value="0.22509057971014493" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/activity_welcome.xml" value="0.20969202898550723" />
@@ -33,6 +40,7 @@
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/bottom_sheet_dialog_changeinfo.xml" value="0.2734375" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/content_home.xml" value="0.20969202898550723" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/content_main.xml" value="0.20969202898550723" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/dialog_edit_surplus.xml" value="0.21557971014492755" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/dialog_notify.xml" value="0.2667572463768116" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/fragment_account.xml" value="0.264" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/fragment_checkdomain.xml" value="0.2" />
@@ -45,6 +53,9 @@
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/fragment_slideshow.xml" value="0.20969202898550723" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/fragment_store.xml" value="0.20969202898550723" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/fragment_trangchu.xml" value="0.20969202898550723" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/item_domain.xml" value="0.21557971014492755" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/item_domain_dashboard.xml" value="0.264" />
+        <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/item_domain_dashboard_all.xml" value="0.21557971014492755" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/kiemtramien.xml" value="0.264" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/loginaccount.xml" value="0.152" />
         <entry key="..\:/tool/source/MyDomain/app/src/main/res/layout/nav_header_home.xml" value="0.20969202898550723" />

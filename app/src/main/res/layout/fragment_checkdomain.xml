@@ -139,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Tên miền đã đăng ký"
+                android:text=""
                 android:textColor="#E44646"
                 android:textSize="17sp"
                 android:textStyle="bold" />

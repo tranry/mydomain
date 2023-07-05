@@ -1,83 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/custom_login"
+    android:orientation="vertical"
     app:layoutDescription="@xml/activity_login_scene2"
-    tools:context=".Login">
+    tools:context=".Login" >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="WELCOME BACK"
-        android:textColor="#5A82A3"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="270dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="394dp">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vui lòng điền thông tin tài khoản"
-        android:textSize="15sp"
-        tools:layout_editor_absoluteX="122dp"
-        tools:layout_editor_absoluteY="238dp" />
 
-    <Button
-        android:id="@+id/btnAccess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_button"
-        android:text="Đăng Nhập"
-        app:backgroundTint="@null"
-        tools:layout_editor_absoluteX="143dp"
-        tools:layout_editor_absoluteY="559dp" />
+        <ImageView
+            android:id="@+id/imgtree"
+            android:layout_width="199dp"
+            android:layout_height="210dp"
+            android:layout_marginStart="225dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bglogin24" />
 
-    <EditText
-        android:id="@+id/edtEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="320dp"
-        android:background="@drawable/custom_edittext"
-        android:drawableStart="@drawable/ic_baseline_email_24"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="20dp"
-        tools:ignore="TouchTargetSizeCheck"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout16"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="200dp"
+            android:background="@drawable/custom_bglogin"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="440dp" />
+            <ImageView
+                android:id="@+id/imgSen"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.49"
+                app:srcCompat="@drawable/loginlogou" />
 
-    <EditText
-        android:id="@+id/edtPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="320dp"
-        android:background="@drawable/custom_edittext"
-        android:drawableStart="@drawable/ic_baseline_cloud_done_24"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="Nhập mật khẩu"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp"
-        tools:ignore="TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="510dp" />
+            <TextView
+                android:id="@+id/textViewBgLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/backlogin"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="52dp" />
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
+                android:text="CHÀO MỪNG\nTRỞ LẠI"
+                android:textColor="#6E8F9E"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imgSen"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.47" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout15"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout16">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bglogin22"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageViewBgLogin"
+                android:layout_width="78dp"
+
+                android:layout_height="86dp"
+                android:layout_marginEnd="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                app:layout_constraintHorizontal_bias="0.42"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                app:layout_constraintVertical_bias="0.673"
+                app:srcCompat="@drawable/getlimit" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E3EFFF"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="ĐĂNG NHẬP"
+            android:textColor="#517B8E"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="71dp"
+            tools:layout_editor_absoluteY="270dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="Điền thông tin tài khoản để tiếp tục"
+            android:textColor="#517B8E"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="122dp"
+            tools:layout_editor_absoluteY="238dp" />
+
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:width="320dp"
+            android:background="@drawable/custom_login"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp"
+            tools:ignore="TouchTargetSizeCheck"
+
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="440dp" />
+
+        <EditText
+            android:id="@+id/edtPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:width="320dp"
+            android:background="@drawable/custom_login"
+            android:drawableStart="@drawable/ic_baseline_cloud_done_24"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Nhập mật khẩu"
+
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            tools:ignore="TouchTargetSizeCheck"
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="510dp" />
+
+
+        <ImageView
+            android:id="@+id/btnAccess"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="36dp"
+            android:background="@drawable/custom_login"
+            android:scaleX="-1"
+            app:srcCompat="@drawable/buttonlogingif" />
+    </LinearLayout>
+
+
+</LinearLayout>

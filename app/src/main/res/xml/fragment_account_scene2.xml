@@ -46,6 +46,11 @@
             android:layout_height="8dp"
             motion:layout_editor_absoluteY="220dp"
             motion:layout_constraintStart_toEndOf="@+id/imageView19" />
+        <Constraint
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/constraintLayout7"
+            motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

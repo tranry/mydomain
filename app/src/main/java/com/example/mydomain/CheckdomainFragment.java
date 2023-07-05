@@ -54,7 +54,7 @@ public class CheckdomainFragment extends Fragment {
     View mView;
     EditText edtDomain;
     Button btnCheck,btnBuyDomain;
-    TextView textKQ;
+    TextView textDomainLive;
     ImageView img;
     LinearLayout layoutDie,layoutLive;
 
@@ -100,7 +100,7 @@ public class CheckdomainFragment extends Fragment {
          mView=inflater.inflate(R.layout.fragment_checkdomain, container, false);
          btnCheck= mView.findViewById(R.id.btnCheckDomain);
          edtDomain=mView.findViewById(R.id.edtInputDomain);
-//         textKQ=mView.findViewById(R.id.textKQ);
+        textDomainLive=mView.findViewById(R.id.textDomainLive);
         img=mView.findViewById(R.id.imgCheckDm);
         layoutDie=mView.findViewById(R.id.layoutDie);
         layoutLive=mView.findViewById(R.id.layoutLive);
@@ -141,6 +141,13 @@ public class CheckdomainFragment extends Fragment {
                                 for (char i : textPrice.getText().toString().toCharArray()) {
                                     if (Character.isDigit(i))
                                         builder.append(i);
+                                }
+                                try {
+                                   us.getMoney();
+                                }catch (Exception e)
+                                {
+                                    Toast.makeText(mView.getContext(), "Bạn không đủ tiền để thanh toán", Toast.LENGTH_SHORT).show();
+                                    return;
                                 }
                                 if (us.getMoney() >= Long.parseLong(builder.toString())) {
                                     Long sum = us.getMoney() - Long.parseLong(builder.toString());
@@ -198,6 +205,8 @@ public class CheckdomainFragment extends Fragment {
                                                  layoutDie.setVisibility(View.VISIBLE);
                                              }
                                              else {
+                                                 textDomainLive.setText("Tên miền "+edtDomain.getText().toString()
+                                                         + " đã đăng ký"+"\nCòn hạn "+data.getDays_to_expire() +" ngày");
                                                  layoutDie.setVisibility(View.GONE);
                                                  layoutLive.setVisibility(View.VISIBLE);
                                              }

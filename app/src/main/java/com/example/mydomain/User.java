@@ -1,16 +1,25 @@
 package com.example.mydomain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
-    private Long id;
+    private Long username;
     private Long money;
     private Long phoneNumber;
 
-    public Long getId() {
-        return id;
+    public Long getUsername() {
+        return username;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsername(Long username) {
+        this.username = username;
+    }
+
+    public User(Long username, Long money, Long phoneNumber) {
+        this.username = username;
+        this.money = money;
+        this.phoneNumber = phoneNumber;
     }
 
     public Long getMoney() {
@@ -29,11 +38,16 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public User(Long id, Long money, Long phoneNumber) {
-        this.id = id;
-        this.money = money;
-        this.phoneNumber = phoneNumber;
-    }
+
     public User() {
+
+    }
+    public Map<String,Object> toMap()
+    {
+        HashMap<String,Object> map=new HashMap<>();
+        map.put("username",this.getUsername());
+        map.put("money",this.getMoney());
+        map.put("phoneNumber",this.getPhoneNumber());
+        return map;
     }
 }

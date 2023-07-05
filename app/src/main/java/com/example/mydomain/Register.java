@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity {
     ImageView imgBack;
-    Button btnSignUp;
+    ImageView btnSignUp;
     EditText edtEmail,edtPassword,edtPasswords;
     ProgressDialog progress;
     private boolean KiemTraKytu(String key,String text)
@@ -40,13 +40,6 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         getSupportActionBar().hide();
-        imgBack=findViewById(R.id.imgBack);
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
         progress=new ProgressDialog(Register.this);
         edtEmail=findViewById(R.id.edtEmailSignUp);
         edtPassword=findViewById(R.id.edtPasswordSignUp);

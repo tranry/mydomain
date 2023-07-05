@@ -8,9 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Icon;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
@@ -24,16 +22,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.ComponentActivity;
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,8 +33,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthEmailException;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
@@ -72,7 +62,7 @@ public class AccountFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 //    TextView edtName;
-    TextView edtEmail,edtSDT,edtNames;
+    TextView edtEmail,edtSDT,edtNames,textSurplus;
     Button btnEditInfo;View mView;
     ConstraintLayout constraintShare,constraintChangeInfo;
     Button btnChangeInfo;
@@ -81,7 +71,7 @@ public class AccountFragment extends Fragment {
     Handler myHandler;
     String verificationId;
     boolean KiemTraGuiSms=false;
-    ImageView imgChangeAvata,profile_image;
+    ImageView imgChangeAvata,profile_image,imgEditSurplus;
 
 
     public AccountFragment() {
@@ -128,8 +118,19 @@ public class AccountFragment extends Fragment {
         profile_image=mView.findViewById(R.id.profile_image);
         constraintNotify=mView.findViewById(R.id.constraintNotify);
         constraintExit=mView.findViewById(R.id.constraintExit);
-        constraintManageDomain=mView.findViewById(R.id.constraintManageDomain);
+        constraintManageDomain=mView.findViewById(R.id.constraintManagerDomain);
+        textSurplus=mView.findViewById(R.id.textSurplus);
+        imgEditSurplus=mView.findViewById(R.id.imgEditSurplus);
         getInfoUser();
+        getSurplus();
+        imgEditSurplus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogSurplus();
+            }
+
+
+        });
         constraintNotify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,6 +210,69 @@ public class AccountFragment extends Fragment {
             }
         });
         return mView;
+    }
+
+    private void dialogSurplus() {
+        final Dialog dialog=new Dialog(mView.getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_edit_surplus);
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,700);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        dialog.show();
+        View view=getLayoutInflater().inflate(R.layout.dialog_edit_surplus,null,false);
+        EditText edtSurPlus=view.findViewById(R.id.edtSurPlus);
+
+        Button btnEditSurPlus=view.findViewById(R.id.btnEditSurPlus);
+        btnEditSurPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(edtSurPlus.getText().toString().isEmpty()||Integer.parseInt(edtSurPlus.getText().toString())<0)
+                {
+                    Toast.makeText(view.getContext(),"Nhập lại số tiền cần sửa",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference=firebaseDatabase.getReference("info");
+                databaseReference.child(user.getUid()).child("money").setValue(Long.parseLong(edtSurPlus.getText().toString())).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(view.getContext(),"Cập nhật thành công",Toast.LENGTH_SHORT).show();
+                            getSurplus();
+                            dialog.dismiss();
+                        }
+                    }
+                });
+            }
+        });
+        dialog.setContentView(view);
+    }
+
+    private void getSurplus() {
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=firebaseDatabase.getReference("info");
+        databaseReference.child(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                User us = new User();
+                us = task.getResult().getValue(User.class);
+
+                try {
+                    us.getMoney();
+                } catch (Exception e) {
+                    return;
+                }
+                Long surPlus = us.getMoney();
+                textSurplus.setText("Số dư : "+surPlus+"$");
+            }
+        });
+
     }
 
     private void dialogNotify(Context context) {
