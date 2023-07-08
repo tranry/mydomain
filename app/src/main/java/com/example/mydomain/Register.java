@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Register extends AppCompatActivity {
     ImageView imgBack;
@@ -67,6 +69,9 @@ public class Register extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             progress.dismiss();
                                             if (task.isSuccessful()) {
+                                                UserProfileChangeRequest userProfileChangeRequest=new UserProfileChangeRequest.Builder().setDisplayName("Member").build();
+                                                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                                                user.updateProfile(userProfileChangeRequest);
                                                 Intent it = new Intent(view.getContext(), Login.class);
                                                 startActivity(it);
                                                 finishAffinity();

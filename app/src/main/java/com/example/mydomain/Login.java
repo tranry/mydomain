@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -127,6 +128,7 @@ public class Login extends AppCompatActivity {
                     us.getUsername();
                 } catch (Exception e) {
                     User User = new User(0L,0L,0L);
+
                     databaseReference.child(user.getUid()).setValue(User.toMap());
                 }
 

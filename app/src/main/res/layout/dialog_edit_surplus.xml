@@ -33,7 +33,7 @@
             android:id="@+id/edtSurPlus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/bottom_btn2"
+            android:drawableLeft="@drawable/ic_baseline_whatshot_24"
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="Nhập số tiền cần chỉnh sửa"

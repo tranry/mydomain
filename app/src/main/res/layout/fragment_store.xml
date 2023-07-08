@@ -7,32 +7,91 @@
     android:background="@color/white"
     tools:context=".StoreFragment">
 
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="409dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Do"
+                android:textColor="#2090FE"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.578" />
+            <ImageView
+                android:id="@+id/imgSen"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="13dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout16"
+                app:layout_constraintStart_toEndOf="@+id/textView23"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.492"
+                app:srcCompat="@drawable/loginlogou" />
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="ain"
+                android:textColor="#2090FE"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imgSen"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.526" />
+        </LinearLayout>
+    </LinearLayout>
+
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/sliderView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="44dp"
         app:iss_auto_cycle="true"
+        android:layout_marginTop="10dp"
         app:iss_delay="1000"
         app:iss_period="1000"
         app:iss_text_align="CENTER"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout11" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sliderView">
 
         <LinearLayout
-            android:id="@+id/linearLayout11"
+            android:id="@+id/layoutsearch"
             android:layout_width="280dp"
             android:layout_height="50dp"
             android:orientation="vertical"
@@ -40,28 +99,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/editTextTextPersonName3"
+            <SearchView
+                android:id="@+id/searchViewStore"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+
+                android:layout_height="wrap_content"
                 android:background="@drawable/custom_search"
-                android:drawableEnd="@drawable/search_icon"
-                android:ems="10"
-                android:hint="Nhập tìm kiếm"
-                android:inputType="textPersonName"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textColor="@color/fail"
-                android:textColorHint="@color/color_navigation"
-                android:textSize="20sp" />
+                android:queryHint="Nhập tên miền cần tìm..."
+                android:theme="@style/SearchViewStyle" />
+
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout10"
-            android:layout_width="120dp"
-            android:layout_height="110dp"
-            android:layout_marginStart="60dp"
+            android:layout_width="90dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/custom_edit"
             android:gravity="center"
@@ -69,17 +123,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout12"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
+            app:layout_constraintTop_toBottomOf="@+id/layoutsearch">
 
             <LinearLayout
-                android:layout_width="100dp"
-                android:layout_height="90dp"
+                android:layout_width="77dp"
+                android:layout_height="66dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/custom_login"
+                    android:background="@drawable/custom_bg_store"
                     android:orientation="vertical">
 
                     <ImageView
@@ -89,17 +143,18 @@
                         android:paddingLeft="20dp"
                         android:paddingTop="20dp"
                         android:paddingRight="20dp"
-                        app:srcCompat="@drawable/ic_5" />
+                        app:srcCompat="@drawable/ic_baseline_playlist_add_check_circle_24" />
 
                     <TextView
                         android:id="@+id/textView26"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="5dp"
                         android:gravity="center"
                         android:paddingBottom="10dp"
                         android:text="Đấu Giá"
-                        android:textSize="16dp"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -109,26 +164,26 @@
 
         <LinearLayout
             android:id="@+id/linearLayout12"
-            android:layout_width="120dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="70dp"
+            android:layout_width="90dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="100dp"
             android:background="@drawable/custom_edit"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
+            app:layout_constraintTop_toBottomOf="@+id/layoutsearch">
 
             <LinearLayout
-                android:layout_width="100dp"
-                android:layout_height="90dp"
+                android:layout_width="77dp"
+                android:layout_height="66dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/custom_login"
+                    android:background="@drawable/custom_bg_store"
                     android:orientation="vertical">
 
                     <ImageView
@@ -138,15 +193,18 @@
                         android:paddingLeft="20dp"
                         android:paddingTop="20dp"
                         android:paddingRight="20dp"
-                        app:srcCompat="@drawable/ic_7" />
+                        app:srcCompat="@drawable/ic_baseline_supervised_user_circle_24" />
 
                     <TextView
                         android:id="@+id/textView28"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="8dp"
                         android:gravity="center"
-                        android:text="GIAO DỊCH \nP2P"
+
+                        android:text="Giao Dịch"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -166,7 +224,7 @@
         android:textColor="@color/fail"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintHorizontal_bias="0.905"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 

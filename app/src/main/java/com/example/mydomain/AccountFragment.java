@@ -19,6 +19,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,10 +65,11 @@ public class AccountFragment extends Fragment {
 //    TextView edtName;
     TextView edtEmail,edtSDT,edtNames,textSurplus;
     Button btnEditInfo;View mView;
-    ConstraintLayout constraintShare,constraintChangeInfo;
+    LinearLayout constraintShare,constraintChangeInfo;
     Button btnChangeInfo;
     EditText edtChangeName,editChangeEmail,edtChangeNumber,edtChangePassword;
-    ConstraintLayout layoutbackToAccount,constraintExit,constraintNotify,constraintManageDomain;
+    LinearLayout constraintExit,constraintNotify,constraintManageDomain;
+    ConstraintLayout layoutbackToAccount;
     Handler myHandler;
     String verificationId;
     boolean KiemTraGuiSms=false;
@@ -155,6 +157,12 @@ public class AccountFragment extends Fragment {
                         Toast.makeText(v.getContext(),"Đăng xuất thành công",Toast.LENGTH_SHORT).show();
                     }
                 });
+                alBuilder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
                 alBuilder.create().show();
 
 
@@ -229,7 +237,14 @@ public class AccountFragment extends Fragment {
         btnEditSurPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edtSurPlus.getText().toString().isEmpty()||Integer.parseInt(edtSurPlus.getText().toString())<0)
+                try {
+                    Long.parseLong(edtSurPlus.getText().toString());
+                }catch (Exception e)
+                {
+                    Toast.makeText(view.getContext(),"Nhập lại đúng định dạng số tiền cần sửa",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(edtSurPlus.getText().toString().isEmpty()||Long.parseLong(edtSurPlus.getText().toString())<0)
                 {
                     Toast.makeText(view.getContext(),"Nhập lại số tiền cần sửa",Toast.LENGTH_SHORT).show();
                     return;
@@ -301,6 +316,7 @@ public class AccountFragment extends Fragment {
 
             }
         });
+
         dialog.setContentView(view);
         dialog.show();
     }

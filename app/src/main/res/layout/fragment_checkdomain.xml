@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="330dp"
-        android:background="@drawable/custom_edittext"
+        android:background="@drawable/custom_search"
         android:drawableLeft="@drawable/ic_baseline_toys_24"
         android:drawablePadding="10dp"
         android:ems="10"
@@ -55,7 +55,7 @@
         android:layout_height="290dp"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/identity"
+        app:srcCompat="@drawable/sweeshswoosk"
         tools:layout_editor_absoluteX="0dp" />
 
     <LinearLayout

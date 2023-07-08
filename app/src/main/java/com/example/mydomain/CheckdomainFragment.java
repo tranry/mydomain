@@ -3,7 +3,7 @@ package com.example.mydomain;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -25,16 +24,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,6 +53,7 @@ public class CheckdomainFragment extends Fragment {
     TextView textDomainLive;
     ImageView img;
     LinearLayout layoutDie,layoutLive;
+    String domain;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -110,7 +107,8 @@ public class CheckdomainFragment extends Fragment {
         textNameDomain=mView.findViewById(R.id.textNameDomain);
         final Long[] priceDomain = new Long[1];
 
-        Glide.with(this).load(R.drawable.identity).into(img);
+        Glide.with(this).load(R.drawable.sweeshswoosk).into(img);
+
         btnBuyDomain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +129,6 @@ public class CheckdomainFragment extends Fragment {
                 alBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         databaseReference.child(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -146,6 +143,7 @@ public class CheckdomainFragment extends Fragment {
                                    us.getMoney();
                                 }catch (Exception e)
                                 {
+                                    edtDomain.setText("");
                                     Toast.makeText(mView.getContext(), "Bạn không đủ tiền để thanh toán", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
@@ -156,12 +154,26 @@ public class CheckdomainFragment extends Fragment {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful())
                                             {
-                                                Toast.makeText(mView.getContext(), "Mua Thành công", Toast.LENGTH_SHORT).show();
 
+                                                Toast.makeText(mView.getContext(), "Mua Thành Công", Toast.LENGTH_SHORT).show();
+                                                int index=domain.indexOf(".");
+                                                System.out.print(index);
+                                                String mien= domain.substring(index+1, domain.length());
+                                                int drawable;
+                                                if(mien.equals("com"))
+                                                {
+                                                    drawable=R.drawable.com;
+                                                }
+                                                else if(mien.equals("net"))
+                                                {
+                                                    drawable=R.drawable.net;
+                                                }
+                                                else drawable=R.drawable.site;
+                                                setDataDomain(domain,drawable,Integer.parseInt(builder.toString()),0);
                                             }
                                         }
                                     });
-                                } else {
+                                } else {edtDomain.setText("");
                                     Toast.makeText(mView.getContext(), "Bạn không đủ tiền trong tài khoản", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -176,7 +188,8 @@ public class CheckdomainFragment extends Fragment {
          btnCheck.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-                     String domain=edtDomain.getText().toString();
+                     domain=edtDomain.getText().toString();
+                     edtDomain.setText("");
                      if(domain.indexOf(".")>0) {
                      ApiService.api.call(domain).enqueue(new Callback<DataObject>() {
                          @SuppressLint("ResourceAsColor")
@@ -205,7 +218,7 @@ public class CheckdomainFragment extends Fragment {
                                                  layoutDie.setVisibility(View.VISIBLE);
                                              }
                                              else {
-                                                 textDomainLive.setText("Tên miền "+edtDomain.getText().toString()
+                                                 textDomainLive.setText("Tên miền "+domain
                                                          + " đã đăng ký"+"\nCòn hạn "+data.getDays_to_expire() +" ngày");
                                                  layoutDie.setVisibility(View.GONE);
                                                  layoutLive.setVisibility(View.VISIBLE);
@@ -267,6 +280,37 @@ public class CheckdomainFragment extends Fragment {
 
 
          return mView;
+    }
+
+    private void setDataDomain(String domain,int i,int price,int history) {
+            FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference=firebaseDatabase.getReference("manager");
+            DatabaseReference newChildRef = databaseReference.push();
+
+            // Lấy ID ngẫu nhiên
+            String generatedId = newChildRef.getKey();
+            databaseReference.child(user.getUid()).child(generatedId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    InfoDomain us = task.getResult().getValue(InfoDomain.class);
+
+                    try {
+                        us.getNamedomain();
+                    } catch (Exception e) {
+
+                        InfoDomain infoDomain=new InfoDomain(user.getDisplayName(),domain,i,price,history);
+
+                        databaseReference.child(user.getUid()).child(generatedId).setValue(infoDomain.toMap());
+                        Intent intent=new Intent(mView.getContext(),Manage.class);
+                        startActivity(intent);
+                    }
+
+
+                }
+            });
+
+
     }
 
 }

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".cauhoi">
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TRẢ LỜI CÂU HỎI DƯỚI ĐÂY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Để lưu tệp văn bản sử dụng tổ hợp phím"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.269"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout18"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView29">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/rdBtnA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CTRL+ A" />
+            <RadioButton
+                android:id="@+id/rdBtnS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CTRL+S" />
+            <RadioButton
+                android:id="@+id/rdBtnSA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SHIFT+S" />
+
+            <RadioButton
+                android:id="@+id/rdBtnSO"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SHIFT+O" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout18"
+        app:layout_constraintVertical_bias="0.095">
+
+        <Button
+            android:id="@+id/btnCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:text="Trả lời" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Trở lại" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

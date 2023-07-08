@@ -13,24 +13,10 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:layout_height="96dp"
-            android:layout_width="410dp"
-            android:id="@+id/imageView19"
-            motion:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="220dp"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintHorizontal_bias="0.0" />
-        <Constraint
             motion:layout_editor_absoluteX="151dp"
             motion:layout_constraintTop_toBottomOf="@+id/imageView19"
             android:id="@+id/view2"
             motion:layout_editor_absoluteY="288dp" />
-        <Constraint
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/imageView19"
-            android:id="@+id/view3" />
         <Constraint
             motion:layout_constraintEnd_toStartOf="@+id/constraintLayout7"
             android:id="@+id/constraintLayout" />
@@ -48,9 +34,63 @@
             motion:layout_constraintStart_toEndOf="@+id/imageView19" />
         <Constraint
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/constraintLayout7"
-            motion:layout_constraintTop_toTopOf="parent" />
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_editor_absoluteY="85dp"
+            motion:layout_editor_absoluteX="0dp" />
+        <Constraint
+            motion:layout_constraintTop_toBottomOf="@+id/imageView19"
+            android:id="@+id/linearLayout17"
+            motion:layout_editor_absoluteY="316dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="410dp"
+            android:layout_marginRight="410dp"
+            motion:layout_constraintEnd_toEndOf="parent" />
+        <Constraint
+            motion:layout_editor_absoluteY="340dp"
+            motion:layout_editor_absoluteX="122dp"
+            android:id="@+id/linearLayout22" />
+        <Constraint
+            motion:layout_editor_absoluteX="1dp"
+            motion:layout_constraintTop_toBottomOf="@+id/imageView19"
+            android:id="@+id/linearLayout16" />
+        <Constraint android:id="@+id/linearLayout23"
+            motion:layout_editor_absoluteY="413dp"
+            motion:layout_editor_absoluteX="171dp"
+            android:layout_width="68dp"
+            android:layout_height="48dp" />
+        <Constraint
+            motion:layout_constraintTop_toBottomOf="@+id/imageView19"
+            android:id="@+id/linearLayout24"
+            android:layout_width="214dp"
+            android:layout_height="108dp"
+            motion:layout_editor_absoluteX="130dp"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            motion:layout_editor_absoluteY="316dp"
+            motion:layout_editor_absoluteX="16dp"
+            android:id="@+id/constraintLayout17" />
+        <Constraint
+            motion:layout_constraintTop_toTopOf="@+id/constraintLayout7"
+            android:id="@+id/constraintLayout18"
+            android:layout_width="88dp"
+            android:layout_height="49dp"
+            motion:layout_editor_absoluteY="368dp"
+            motion:layout_editor_absoluteX="144dp" />
+        <Constraint
+            motion:layout_editor_absoluteX="1dp"
+            motion:layout_constraintTop_toBottomOf="@+id/imageView19"
+            android:id="@+id/linearLayout25" />
+        <Constraint
+            android:layout_height="96dp"
+            android:layout_marginTop="220dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="410dp"
+            android:id="@+id/imageView20" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

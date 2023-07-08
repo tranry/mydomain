@@ -11,7 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="394dp">
+        android:layout_height="344dp">
 
 
         <ImageView
@@ -28,12 +28,11 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout16"
-            android:layout_width="320dp"
+            android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="200dp"
             android:background="@drawable/custom_bglogin"
-            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,39 +40,57 @@
 
             <ImageView
                 android:id="@+id/imgSen"
-                android:layout_width="60dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="4dp"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="3dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="@+id/constraintLayout16"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView23"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.49"
+                app:layout_constraintVertical_bias="0.492"
                 app:srcCompat="@drawable/loginlogou" />
 
             <TextView
-                android:id="@+id/textViewBgLogin"
+                android:id="@+id/textView23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Do"
+                android:textColor="#2090FE"
+                android:textSize="50dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.578" />
 
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="30dp"
-                android:text="CHÀO MỪNG\nTRỞ LẠI"
-                android:textColor="#6E8F9E"
-                android:textSize="30sp"
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="ain"
+
+                android:textColor="#2090FE"
+                android:textSize="43dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imgSen"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.47" />
+                app:layout_constraintVertical_bias="0.526" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout15"
             android:layout_width="match_parent"
             android:layout_height="280dp"
+            android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout16">
 
@@ -82,18 +99,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
+
                 android:src="@drawable/bglogin22"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/imageViewBgLogin"
                 android:layout_width="78dp"
-
                 android:layout_height="86dp"
                 android:layout_marginEnd="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -103,7 +118,6 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView2"
                 app:layout_constraintVertical_bias="0.673"
                 app:srcCompat="@drawable/getlimit" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

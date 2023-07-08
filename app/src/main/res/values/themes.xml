@@ -27,4 +27,8 @@
         <item name="android:windowEnterAnimation">@anim/sile_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/sile_out_bottom</item>
     </style>
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+
+    </style>
+
 </resources>

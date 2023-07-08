@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/viewGroupManager"
     tools:context=".Manage">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout11"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,46 +25,38 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/top_background" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imgBackAccountFragment"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="35dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/btn_arraw1" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout12"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_marginTop="10dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="412dp"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.985"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView21"
-                android:layout_width="243dp"
+            <TextView
+                android:id="@+id/textMana"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:text="Quản Lý Tên Miền"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/cabin2" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -71,14 +64,14 @@
             android:id="@+id/linearLayout10"
             android:layout_width="300dp"
             android:layout_height="100dp"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/custom_edit"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/custom_bg_store"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout12">
+            app:layout_constraintTop_toTopOf="@+id/imageView13">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -120,8 +113,8 @@
                     <ImageView
                         android:id="@+id/imageView24"
                         android:layout_width="70dp"
-                        android:layout_height="37dp"
-                        android:paddingLeft="20dp"
+                        android:layout_height="40dp"
+                        android:paddingLeft="30dp"
                         android:paddingTop="20dp"
                         android:paddingRight="20dp"
                         app:srcCompat="@drawable/ic_7" />
@@ -147,7 +140,7 @@
                         android:id="@+id/imageView22"
                         android:layout_width="70dp"
                         android:layout_height="40dp"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="30dp"
                         android:paddingTop="20dp"
                         android:paddingRight="20dp"
                         app:srcCompat="@drawable/ic_6" />
@@ -165,7 +158,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout11"
+            android:id="@+id/layoutsearch"
             android:layout_width="280dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -178,34 +171,24 @@
                 android:id="@+id/editTextTextPersonName3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/custom_search"
-                android:drawableEnd="@drawable/search_icon"
+                android:drawableEnd="@drawable/search"
                 android:ems="10"
                 android:hint="Nhập tìm kiếm"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:textColor="@color/fail"
-                android:textColorHint="@color/color_navigation"
-                android:textSize="20sp" />
+                android:textColor="@color/purple_500"
+                android:textColorHint="@color/purple_500"
+                android:textSize="20sp"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="412dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout11"
-        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

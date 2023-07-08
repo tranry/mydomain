@@ -15,6 +15,19 @@ public class DomainDashboardAdapter extends RecyclerView.Adapter<DomanViewHolder
     public DomainDashboardAdapter(List<InfoDomain> listInfo) {
         this.listInfo = listInfo;
     }
+    public void setFilterList(List<InfoDomain> listInfo)
+    {
+        this.listInfo=listInfo;
+        notifyDataSetChanged();
+    }
+
+    public List<InfoDomain> getListInfo() {
+        return listInfo;
+    }
+
+    public void setListInfo(List<InfoDomain> listInfo) {
+        this.listInfo = listInfo;
+    }
 
     @NonNull
     @Override
@@ -28,10 +41,10 @@ public class DomainDashboardAdapter extends RecyclerView.Adapter<DomanViewHolder
         InfoDomain info=listInfo.get(position);
         if(info==null)
             return;
-        holder.name.setText(info.getNameDomain());
-        holder.imgDomain.setImageResource(info.getImgDomain());
-        holder.price.setText("Giá : "+info.getPriceDomain()+"$");
-        holder.uid.setText("Tên người bán"+info.getUid());
+        holder.name.setText(info.getNamedomain());
+        holder.imgDomain.setImageResource(info.getImgdomain());
+        holder.price.setText("Giá : "+info.getPricedomain()+"$");
+        holder.uid.setText("Người bán : "+info.getUid());
     }
 
     @Override
