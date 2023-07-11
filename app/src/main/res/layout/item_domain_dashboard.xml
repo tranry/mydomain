@@ -44,14 +44,7 @@
             android:layout_height="wrap_content"
             android:text="Giá : 10$" />
 
-        <TextView
-            android:id="@+id/uidName"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tên người bán" />
+
 
         <Button
             android:id="@+id/btnBuyDashBoard"

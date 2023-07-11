@@ -13,7 +13,10 @@ public class InfoDomain implements Parcelable{
     private int pricedomain;
     private int history;
     private  String key;
+public InfoDomain()
+{
 
+}
 
     public int getHistory() {
         return history;
@@ -80,6 +83,19 @@ public class InfoDomain implements Parcelable{
         data.put("imgdomain",getImgdomain());
         data.put("pricedomain",getPricedomain());
         data.put("history",getHistory());
+
+        return data;
+    }
+    public Map<String,Object> toMapKey()
+    {
+        HashMap<String,Object> data=new HashMap<>();
+        data.put("uid",getUid());
+        data.put("namedomain",getNamedomain());
+        data.put("imgdomain",getImgdomain());
+        data.put("pricedomain",getPricedomain());
+        data.put("history",getHistory());
+        data.put("key",getKey());
+
         return data;
     }
 

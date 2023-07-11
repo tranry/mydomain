@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -25,12 +26,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,6 +59,7 @@ public class CheckdomainFragment extends Fragment {
     ImageView img;
     LinearLayout layoutDie,layoutLive;
     String domain;
+    List<String> dsDomain;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -84,6 +90,13 @@ public class CheckdomainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dsDomain=new ArrayList<>();
+        KiemTraTonTaiTrongHeThong(new OnLoadData() {
+            @Override
+            public void onClickCheck(String domain) {
+                dsDomain.add(domain);
+            }
+        });
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -105,7 +118,6 @@ public class CheckdomainFragment extends Fragment {
         TextView textNameDomain,textPrice;
         textPrice=mView.findViewById(R.id.textPrice);
         textNameDomain=mView.findViewById(R.id.textNameDomain);
-        final Long[] priceDomain = new Long[1];
 
         Glide.with(this).load(R.drawable.sweeshswoosk).into(img);
 
@@ -143,7 +155,7 @@ public class CheckdomainFragment extends Fragment {
                                    us.getMoney();
                                 }catch (Exception e)
                                 {
-                                    edtDomain.setText("");
+
                                     Toast.makeText(mView.getContext(), "Bạn không đủ tiền để thanh toán", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
@@ -154,8 +166,9 @@ public class CheckdomainFragment extends Fragment {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful())
                                             {
+                                                layoutDie.setVisibility(View.GONE);
+                                                edtDomain.setText("");
 
-                                                Toast.makeText(mView.getContext(), "Mua Thành Công", Toast.LENGTH_SHORT).show();
                                                 int index=domain.indexOf(".");
                                                 System.out.print(index);
                                                 String mien= domain.substring(index+1, domain.length());
@@ -169,7 +182,14 @@ public class CheckdomainFragment extends Fragment {
                                                     drawable=R.drawable.net;
                                                 }
                                                 else drawable=R.drawable.site;
-                                                setDataDomain(domain,drawable,Integer.parseInt(builder.toString()),0);
+                                                setDataDomain(domain, drawable, Integer.parseInt(builder.toString()), 0, new OnLoadData() {
+                                                    @Override
+                                                    public void onClickCheck(String domain) {
+                                                        dsDomain.add(domain);
+
+                                                    }
+                                                });
+
                                             }
                                         }
                                     });
@@ -189,7 +209,15 @@ public class CheckdomainFragment extends Fragment {
                  @Override
                  public void onClick(View view) {
                      domain=edtDomain.getText().toString();
-                     edtDomain.setText("");
+                   for(String s:dsDomain)
+                   {
+                       if(s.equals(domain)) {
+                           Toast.makeText(mView.getContext(),"Tên miền đã tồn tại trong hệ thống",Toast.LENGTH_SHORT).show();
+                           return;
+
+                       }
+                   }
+
                      if(domain.indexOf(".")>0) {
                      ApiService.api.call(domain).enqueue(new Callback<DataObject>() {
                          @SuppressLint("ResourceAsColor")
@@ -218,6 +246,7 @@ public class CheckdomainFragment extends Fragment {
                                                  layoutDie.setVisibility(View.VISIBLE);
                                              }
                                              else {
+                                                 edtDomain.setText("");
                                                  textDomainLive.setText("Tên miền "+domain
                                                          + " đã đăng ký"+"\nCòn hạn "+data.getDays_to_expire() +" ngày");
                                                  layoutDie.setVisibility(View.GONE);
@@ -275,14 +304,55 @@ public class CheckdomainFragment extends Fragment {
                          Toast.makeText(view.getContext(), "Vui lòng nhập đúng định dạng tên miền", Toast.LENGTH_SHORT).show();
                      }
                  }
-
              });
 
 
          return mView;
     }
 
-    private void setDataDomain(String domain,int i,int price,int history) {
+    private void KiemTraTonTaiTrongHeThong(OnLoadData on) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("manager");
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String s = snapshot.getValue().toString();
+                String [] dataMulti=s.split("\\}");
+                for(String i:dataMulti)
+                {
+                    String domain=i.split("namedomain=")[1].split(",")[0].trim();
+                    on.onClickCheck(domain);
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+                    }
+    public interface OnLoadData
+    {
+        void onClickCheck(String domain);
+
+    }
+    private void setDataDomain(String domain,int i,int price,int history,OnLoadData on) {
             FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
             FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
             DatabaseReference databaseReference=firebaseDatabase.getReference("manager");
@@ -299,9 +369,15 @@ public class CheckdomainFragment extends Fragment {
                         us.getNamedomain();
                     } catch (Exception e) {
 
-                        InfoDomain infoDomain=new InfoDomain(user.getDisplayName(),domain,i,price,history);
+                        InfoDomain infoDomain=new InfoDomain(user.getUid(),domain,i,price,history);
 
-                        databaseReference.child(user.getUid()).child(generatedId).setValue(infoDomain.toMap());
+                        databaseReference.child(user.getUid()).child(generatedId).updateChildren(infoDomain.toMap(), new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                Toast.makeText(mView.getContext(), "Mua Thành Công", Toast.LENGTH_SHORT).show();
+                                on.onClickCheck(infoDomain.getNamedomain());
+                            }
+                        });
                         Intent intent=new Intent(mView.getContext(),Manage.class);
                         startActivity(intent);
                     }

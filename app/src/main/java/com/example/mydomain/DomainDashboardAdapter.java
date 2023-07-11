@@ -11,23 +11,22 @@ import java.util.List;
 
 public class DomainDashboardAdapter extends RecyclerView.Adapter<DomanViewHolder> {
     private List<InfoDomain> listInfo;
-
-    public DomainDashboardAdapter(List<InfoDomain> listInfo) {
+    private IclickListener iclickListener;
+    private InfoDomain info;
+    public DomainDashboardAdapter(List<InfoDomain> listInfo,IclickListener iclickListener) {
         this.listInfo = listInfo;
+        this.iclickListener=iclickListener;
+        notifyDataSetChanged();
+
     }
     public void setFilterList(List<InfoDomain> listInfo)
     {
         this.listInfo=listInfo;
         notifyDataSetChanged();
+
     }
 
-    public List<InfoDomain> getListInfo() {
-        return listInfo;
-    }
 
-    public void setListInfo(List<InfoDomain> listInfo) {
-        this.listInfo = listInfo;
-    }
 
     @NonNull
     @Override
@@ -38,15 +37,26 @@ public class DomainDashboardAdapter extends RecyclerView.Adapter<DomanViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull DomanViewHolder holder, int position) {
-        InfoDomain info=listInfo.get(position);
+        info=listInfo.get(position);
+        int i=position;
         if(info==null)
             return;
         holder.name.setText(info.getNamedomain());
         holder.imgDomain.setImageResource(info.getImgdomain());
         holder.price.setText("Giá : "+info.getPricedomain()+"$");
-        holder.uid.setText("Người bán : "+info.getUid());
+        holder.btnBuyDashBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                info=listInfo.get(i);
+                iclickListener.onClickBuyItem(info);
+            }
+        });
     }
+    public interface IclickListener
+    {
+        void onClickBuyItem(InfoDomain info);
 
+    }
     @Override
     public int getItemCount() {
         if(listInfo!=null)

@@ -79,6 +79,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/layoutManagerAdd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginRight="15dp"
@@ -105,6 +106,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutManagerEdit"
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/custom_login"
@@ -130,6 +133,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutManagerDelete"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -167,22 +172,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
 
-            <EditText
-                android:id="@+id/editTextTextPersonName3"
+            <SearchView
+                android:id="@+id/searchViewManager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+
+                android:layout_height="wrap_content"
                 android:background="@drawable/custom_search"
-                android:drawableEnd="@drawable/search"
-                android:ems="10"
-                android:hint="Nhập tìm kiếm"
-                android:inputType="textPersonName"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textColor="@color/purple_500"
-                android:textColorHint="@color/purple_500"
-                android:textSize="20sp"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:queryHint="Nhập tên miền cần tìm..."
+                android:theme="@style/SearchViewStyle" />
 
         </LinearLayout>
 
