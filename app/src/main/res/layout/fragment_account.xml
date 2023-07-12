@@ -8,7 +8,7 @@
     android:background="@drawable/custom_card"
     android:orientation="vertical"
     app:layoutDescription="@xml/fragment_account_scene2"
-    tools:context=".StoreFragment">
+    tools:context=".fragment.StoreFragment">
 
     <TextView
         android:id="@+id/textView18"

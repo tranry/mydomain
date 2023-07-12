@@ -1,65 +1,60 @@
-package com.example.mydomain;
+package com.example.mydomain.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.mydomain.activity.DomanViewHolder;
+import com.example.mydomain.object.InfoDomain;
+import com.example.mydomain.R;
 
 import java.util.List;
 
-public class DomainManagerAdapter extends RecyclerView.Adapter<DomanViewHolder>{
+public class DomainManagerAdapter extends RecyclerView.Adapter<DomanViewHolder> {
     private List<InfoDomain> listInfo;
     private IclickListener iclickListener;
     private InfoDomain info;
     String check;
     View Mview;
-    public DomainManagerAdapter(List<InfoDomain> listInfo,IclickListener iclickListener) {
+
+    public DomainManagerAdapter(List<InfoDomain> listInfo, IclickListener iclickListener) {
         this.listInfo = listInfo;
-        this.iclickListener=iclickListener;
+        this.iclickListener = iclickListener;
         notifyDataSetChanged();
 
     }
+
     public void setCheck(String check) {
         this.check = check;
         notifyDataSetChanged();
     }
-    public void setFilterList(List<InfoDomain> listInfo)
-    {
-        this.listInfo=listInfo;
+
+    public void setFilterList(List<InfoDomain> listInfo) {
+        this.listInfo = listInfo;
     }
+
     @NonNull
     @Override
     public DomanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Mview= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_domain_sell,parent,false);
+        Mview = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_domain_sell, parent, false);
         return new DomanViewHolder(Mview);
 
     }
-
 
 
     @Override
     public void onBindViewHolder(@NonNull DomanViewHolder holder, int position) {
 
         info = listInfo.get(position);
-        int i=position;
+        int i = position;
         if (info == null) {
             return;
         }
-        if(info.getNamedomain().indexOf(".")>0)
-        {
-            info.setNamedomain(info.getNamedomain().substring(0,info.getNamedomain().indexOf(".")));
+        if (info.getNamedomain().indexOf(".") > 0) {
+            info.setNamedomain(info.getNamedomain().substring(0, info.getNamedomain().indexOf(".")));
         }
         holder.name.setText(info.getNamedomain());
         holder.imgDomain.setImageResource(info.getImgdomain());
@@ -90,16 +85,6 @@ public class DomainManagerAdapter extends RecyclerView.Adapter<DomanViewHolder>{
             holder.btnSelectedDeleteItem.setVisibility(View.VISIBLE);
             holder.btnSelectedEditItem.setVisibility(View.GONE);
         }
-//        else if(check.equals("Edit"))
-//        {
-//            holder.btnSelectedDeleteItem.setVisibility(View.GONE);
-//            holder.btnSelectedEditItem.setVisibility(View.VISIBLE);
-//        }
-//        else  if(check.equals("Delete"))
-//        {
-//            holder.btnSelectedDeleteItem.setVisibility(View.VISIBLE);
-//            holder.btnSelectedEditItem.setVisibility(View.GONE);
-//        }
 
         holder.btnSellManage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,17 +121,19 @@ public class DomainManagerAdapter extends RecyclerView.Adapter<DomanViewHolder>{
 
     @Override
     public int getItemCount() {
-        if(listInfo!=null)
+        if (listInfo != null)
             return listInfo.size();
         return 0;
     }
 
 
-    public interface IclickListener
-    {
+    public interface IclickListener {
         void onClickSellItem(InfoDomain info);
+
         void onClickCancelIem(InfoDomain info);
+
         void onClickSelectedEditItem(InfoDomain info);
+
         void onClickSelectedDeleteItem(InfoDomain info);
     }
 

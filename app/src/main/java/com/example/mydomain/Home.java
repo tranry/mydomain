@@ -4,28 +4,26 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
 
+import com.example.mydomain.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity {
     ViewPager mView;
     BottomNavigationView bottom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         this.getSupportActionBar().hide();
-        mView=findViewById(R.id.viewPager);
-        bottom=findViewById(R.id.bottom_navigation);
-        ViewPagerAdapter adapter= new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        mView = findViewById(R.id.viewPager);
+        bottom = findViewById(R.id.bottom_navigation);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mView.setAdapter(adapter);
         mView.setOffscreenPageLimit(2);
         mView.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -36,8 +34,7 @@ public class Home extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                switch (position)
-                {
+                switch (position) {
                     case 0:
                         bottom.getMenu().findItem(R.id.navigation_store).setChecked(true);
                         break;
@@ -60,8 +57,7 @@ public class Home extends AppCompatActivity {
         bottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId())
-                {
+                switch (item.getItemId()) {
                     case R.id.navigation_store:
                         mView.setCurrentItem(0);
                         break;
@@ -77,5 +73,5 @@ public class Home extends AppCompatActivity {
             }
 
         });
-}
+    }
 }

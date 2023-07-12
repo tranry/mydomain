@@ -1,4 +1,4 @@
-package com.example.mydomain;
+package com.example.mydomain.object;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,17 +6,17 @@ import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InfoDomain implements Parcelable{
+public class InfoDomain implements Parcelable {
     private String uid;
     private String namedomain;
     private int imgdomain;
     private int pricedomain;
     private int history;
-    private  String key;
-public InfoDomain()
-{
+    private String key;
 
-}
+    public InfoDomain() {
+
+    }
 
     public int getHistory() {
         return history;
@@ -74,27 +74,30 @@ public InfoDomain()
         this.pricedomain = pricedomain;
     }
 
-    public InfoDomain(Parcel in){};
-    public Map<String,Object> toMap()
-    {
-        HashMap<String,Object> data=new HashMap<>();
-        data.put("uid",getUid());
-        data.put("namedomain",getNamedomain());
-        data.put("imgdomain",getImgdomain());
-        data.put("pricedomain",getPricedomain());
-        data.put("history",getHistory());
+    public InfoDomain(Parcel in) {
+    }
+
+    ;
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("uid", getUid());
+        data.put("namedomain", getNamedomain());
+        data.put("imgdomain", getImgdomain());
+        data.put("pricedomain", getPricedomain());
+        data.put("history", getHistory());
 
         return data;
     }
-    public Map<String,Object> toMapKey()
-    {
-        HashMap<String,Object> data=new HashMap<>();
-        data.put("uid",getUid());
-        data.put("namedomain",getNamedomain());
-        data.put("imgdomain",getImgdomain());
-        data.put("pricedomain",getPricedomain());
-        data.put("history",getHistory());
-        data.put("key",getKey());
+
+    public Map<String, Object> toMapKey() {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("uid", getUid());
+        data.put("namedomain", getNamedomain());
+        data.put("imgdomain", getImgdomain());
+        data.put("pricedomain", getPricedomain());
+        data.put("history", getHistory());
+        data.put("key", getKey());
 
         return data;
     }
@@ -110,6 +113,7 @@ public InfoDomain()
             return new InfoDomain[size];
         }
     };
+
     @Override
     public int describeContents() {
         return 0;

@@ -1,4 +1,4 @@
-package com.example.mydomain;
+package com.example.mydomain.object;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class ListDomain extends ArrayList<Parcelable> implements Parcelable {
@@ -33,6 +32,7 @@ public class ListDomain extends ArrayList<Parcelable> implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(ds);
     }
+
     protected ListDomain(Parcel in) {
         ds = in.createTypedArrayList(InfoDomain.CREATOR);
     }

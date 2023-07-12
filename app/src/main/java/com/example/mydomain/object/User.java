@@ -1,4 +1,4 @@
-package com.example.mydomain;
+package com.example.mydomain.object;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,12 +42,12 @@ public class User {
     public User() {
 
     }
-    public Map<String,Object> toMap()
-    {
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("username",this.getUsername());
-        map.put("money",this.getMoney());
-        map.put("phoneNumber",this.getPhoneNumber());
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("username", this.getUsername());
+        map.put("money", this.getMoney());
+        map.put("phoneNumber", this.getPhoneNumber());
         return map;
     }
 }

@@ -1,9 +1,13 @@
-package com.example.mydomain;
+package com.example.mydomain.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import com.example.mydomain.fragment.AccountFragment;
+import com.example.mydomain.fragment.CheckdomainFragment;
+import com.example.mydomain.fragment.StoreFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -15,8 +19,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position)
-        {
+        switch (position) {
             case 0:
                 return new StoreFragment();
             case 1:

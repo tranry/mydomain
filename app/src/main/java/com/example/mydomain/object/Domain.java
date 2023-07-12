@@ -1,4 +1,4 @@
-package com.example.mydomain;
+package com.example.mydomain.object;
 
 public class Domain {
     private String tenMien;

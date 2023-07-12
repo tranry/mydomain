@@ -1,4 +1,4 @@
-package com.example.mydomain;
+package com.example.mydomain.activity;
 
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mydomain.R;
 
 public class DomanViewHolder extends RecyclerView.ViewHolder {
     public TextView name,price;

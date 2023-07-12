@@ -5,7 +5,7 @@ import android.app.NotificationManager;
 import android.os.Build;
 
 public class Application extends android.app.Application {
-    public static final String chanelID ="Id";
+    public static final String chanelID = "Id";
 
     @Override
     public void onCreate() {
@@ -14,12 +14,11 @@ public class Application extends android.app.Application {
     }
 
     private void createChannelNotification() {
-        //Kiem tra phien ban code,api android >8
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
-        {
+            //Kiem tra phien ban code,api android >8
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //tao chanel id cho phien ban android
-            NotificationChannel channel= new NotificationChannel(chanelID,"Thong bao", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager= getSystemService(NotificationManager.class);
+            NotificationChannel channel = new NotificationChannel(chanelID, "Thong bao", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
     }

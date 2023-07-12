@@ -23,45 +23,40 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Register extends AppCompatActivity {
-    ImageView imgBack;
     ImageView btnSignUp;
-    EditText edtEmail,edtPassword,edtPasswords;
+    EditText edtEmail, edtPassword, edtPasswords;
     ProgressDialog progress;
-    private boolean KiemTraKytu(String key,String text)
-    {
-        if(TextUtils.isEmpty(key))
-        {
+
+    private boolean KiemTraKytu(String key, String text) {
+        if (TextUtils.isEmpty(key)) {
             Toast.makeText(Register.this, text, Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         getSupportActionBar().hide();
-        progress=new ProgressDialog(Register.this);
-        edtEmail=findViewById(R.id.edtEmailSignUp);
-        edtPassword=findViewById(R.id.edtPasswordSignUp);
-        edtPasswords=findViewById(R.id.edtPasswordsSignUp);
-        btnSignUp=findViewById(R.id.btnSignUp);
+        progress = new ProgressDialog(Register.this);
+        edtEmail = findViewById(R.id.edtEmailSignUp);
+        edtPassword = findViewById(R.id.edtPasswordSignUp);
+        edtPasswords = findViewById(R.id.edtPasswordsSignUp);
+        btnSignUp = findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email=edtEmail.getText().toString();
-                String password=edtPassword.getText().toString();
-                String passwords=edtPasswords.getText().toString();
-                if(KiemTraKytu(email,"Vui lòng nhập lại email"))
-                {
-                    if(KiemTraKytu(password,"Vui lòng nhập lại mật khẩu"))
-                    {
-                        if(KiemTraKytu(passwords,"Vui lòng nhập lại mật khẩu"))
-                        {
-                            if(password.equals(passwords))
-                            {
-                                if(password.length()>6) {
+                String email = edtEmail.getText().toString();
+                String password = edtPassword.getText().toString();
+                String passwords = edtPasswords.getText().toString();
+                if (KiemTraKytu(email, "Vui lòng nhập lại email")) {
+                    if (KiemTraKytu(password, "Vui lòng nhập lại mật khẩu")) {
+                        if (KiemTraKytu(passwords, "Vui lòng nhập lại mật khẩu")) {
+                            if (password.equals(passwords)) {
+                                if (password.length() > 6) {
                                     progress.show();
                                     FirebaseAuth auth = FirebaseAuth.getInstance();
                                     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
@@ -69,8 +64,8 @@ public class Register extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             progress.dismiss();
                                             if (task.isSuccessful()) {
-                                                UserProfileChangeRequest userProfileChangeRequest=new UserProfileChangeRequest.Builder().setDisplayName("Member").build();
-                                                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                                                UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName("Member").build();
+                                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                                 user.updateProfile(userProfileChangeRequest);
                                                 Intent it = new Intent(view.getContext(), Login.class);
                                                 startActivity(it);
@@ -86,11 +81,11 @@ public class Register extends AppCompatActivity {
                                             }
                                         }
                                     });
-                                }
-                                else Toast.makeText(Register.this, "Mật khẩu phải trên 6 ký tự", Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(Register.this, "Mật khẩu phải trên 6 ký tự", Toast.LENGTH_SHORT).show();
 
-                            }
-                            else Toast.makeText(Register.this, "Mật khẩu của bạn không khớp", Toast.LENGTH_SHORT).show();
+                            } else
+                                Toast.makeText(Register.this, "Mật khẩu của bạn không khớp", Toast.LENGTH_SHORT).show();
                         }
 
                     }
